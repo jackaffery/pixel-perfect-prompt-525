@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { ArrowRight, Award, Eye, Handshake, Search, ShieldCheck, Smile, Target } from "lucide-react";
+import { ArrowRight, Award, CheckCircle2, Clock, Eye, Facebook, Handshake, Instagram, Linkedin, Mail, Search, ShieldCheck, Smile, Sparkles, Target, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -143,6 +143,147 @@ function Home() {
             <div className="flex gap-3"><Eye className="h-6 w-6 shrink-0 text-sage" /><div><p className="font-semibold">Our Vision</p><p className="text-sm text-muted-foreground">To be America's most trusted name in home and land ownership.</p></div></div>
           </div>
           <Button asChild><Link to="/about">Learn about us <ArrowRight /></Link></Button>
+        </div>
+      </section>
+
+      {/* Sold in 14 Days - Full-Service Digital Marketing Feature */}
+      <section className="bg-secondary/60 py-20 border-y">
+        <div className="container-x grid items-center gap-12 lg:grid-cols-2">
+          {/* Interactive Visual with Floating Social & Listing Badges */}
+          <div className="relative mx-auto max-w-lg lg:max-w-none">
+            <div className="group relative overflow-hidden rounded-2xl shadow-2xl transition-all duration-300 hover:shadow-primary/20">
+              <img
+                src="/agent-sold.png"
+                alt="Real estate professional presenting proven marketing analytics: Sold in 14 Days"
+                className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+
+              {/* Gradient Overlay for subtle depth */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+              {/* Interactive Floating Social Touchpoints */}
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noreferrer"
+                title="Instagram Targeted Ads & Showcase"
+                className="absolute top-6 left-1/4 -translate-x-1/2 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-[#E4405F] shadow-lg backdrop-blur-md transition-all hover:scale-110 hover:bg-white"
+                aria-label="Instagram Real Estate Reach"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                title="LinkedIn Investor & Executive Network"
+                className="absolute top-6 right-1/4 translate-x-1/2 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-[#0A66C2] shadow-lg backdrop-blur-md transition-all hover:scale-110 hover:bg-white"
+                aria-label="LinkedIn Investor Network"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noreferrer"
+                title="Facebook Buyer Community & Retargeting"
+                className="absolute top-1/3 left-6 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-[#1877F2] shadow-lg backdrop-blur-md transition-all hover:scale-110 hover:bg-white"
+                aria-label="Facebook Buyer Campaigns"
+              >
+                <Facebook className="h-5 w-5" />
+              </a>
+
+              <a
+                href="mailto:contact@assethouses.com?subject=Sell%20My%20Property"
+                title="Direct Buyer Email Blast Network"
+                className="absolute top-1/3 right-6 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-primary shadow-lg backdrop-blur-md transition-all hover:scale-110 hover:bg-white"
+                aria-label="Direct Email Campaigns"
+              >
+                <Mail className="h-5 w-5" />
+              </a>
+
+              {/* Floating Performance Pill */}
+              <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-xl bg-background/95 p-3.5 shadow-lift backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 font-bold">
+                    <TrendingUp className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold leading-tight">Average 14 Days on Market</p>
+                    <p className="text-xs text-muted-foreground">98.4% List-to-Sale Price Ratio</p>
+                  </div>
+                </div>
+                <Button asChild size="sm" variant="gold" className="shrink-0">
+                  <Link to="/sell">Sell Faster</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Descriptive Content & Value Highlights */}
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-3.5 py-1 text-xs font-semibold tracking-wide text-amber-800 dark:text-amber-300">
+              <Sparkles className="h-3.5 w-3.5 text-gold" />
+              <span>Multi-Channel Selling Machine</span>
+            </div>
+
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+              Sold in 14 Days. <br />
+              <span className="text-primary">Maximum Value. Zero Guesswork.</span>
+            </h2>
+
+            <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+              We don&apos;t just list your property on a board and hope for the best. We deploy an omni-channel marketing strategy combining hyper-targeted social media campaigns, qualified buyer matchmaking, and real-time performance analytics.
+            </p>
+
+            <div className="grid gap-4 sm:grid-cols-2 pt-2">
+              <div className="flex items-start gap-3 rounded-lg border bg-card p-4 shadow-xs">
+                <Clock className="h-5 w-5 shrink-0 text-emerald-600 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-sm">Swift Turnaround</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Homes close up to 3x faster than traditional regional averages.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 rounded-lg border bg-card p-4 shadow-xs">
+                <Target className="h-5 w-5 shrink-0 text-primary mt-0.5" />
+                <div>
+                  <p className="font-semibold text-sm">Targeted Reach</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Direct exposure to active buyers across Instagram, Facebook & LinkedIn.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 rounded-lg border bg-card p-4 shadow-xs">
+                <Award className="h-5 w-5 shrink-0 text-gold mt-0.5" />
+                <div>
+                  <p className="font-semibold text-sm">Top-Tier Pricing</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Competitive bidding strategies that optimize your net proceeds.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 rounded-lg border bg-card p-4 shadow-xs">
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-sage mt-0.5" />
+                <div>
+                  <p className="font-semibold text-sm">Full Transparency</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Weekly digital analytics dashboards showing impressions and leads.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <Button asChild size="lg" variant="gold">
+                <Link to="/sell">
+                  List Your Property with Us <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/agents">Consult Our Agents</Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
