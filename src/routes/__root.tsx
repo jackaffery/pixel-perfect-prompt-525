@@ -158,7 +158,8 @@ function TawkToChat() {
           }
         }
         for (let i = 0; i < node.childNodes.length; i++) {
-          fixTawkText(node.childNodes[i]);
+          const child = node.childNodes[i];
+          if (child) fixTawkText(child);
         }
       }
     };
