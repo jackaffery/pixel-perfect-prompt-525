@@ -30,7 +30,7 @@ export function SubmissionsAdmin() {
         price: s.asking_price, listing_type: s.listing_type, category: s.category, section: s.category === "land" ? "land" : "standard",
         bedrooms: s.bedrooms ?? 0, bathrooms: s.bathrooms ?? 0, size_sqft: s.size_sqft ?? 0, description: s.description ?? "", images: s.images,
       });
-      if (error) return toast.error(error.message);
+      if (error) { toast.error(error.message); return; }
     }
     await supabase.from("submissions").update({ status: approve ? "approved" : "rejected" }).eq("id", s.id);
     await notify(s.user_id, approve ? "Your property was approved" : "Your property submission was declined",

@@ -38,7 +38,7 @@ export function InquiryForm({ propertyId, kind = "contact", defaultMessage = "" 
       message: String(fd.get("message")).trim(),
     });
     setBusy(false);
-    if (error) return toast.error("Could not send your message. Please try again.");
+    if (error) { toast.error("Could not send your message. Please try again."); return; }
     toast.success("Your inquiry has been sent. We'll be in touch shortly.");
     setDone(true);
   };
@@ -48,7 +48,7 @@ export function InquiryForm({ propertyId, kind = "contact", defaultMessage = "" 
   return (
     <form onSubmit={submit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="space-y-1.5"><Label htmlFor="iq-name">Full name</Label><Input id="iq-name" name="name" required maxLength={100} defaultValue={user?.user_metadata?.full_name ?? ""} /></div>
+        <div className="space-y-1.5"><Label htmlFor="iq-name">Full name</Label><Input id="iq-name" name="name" required maxLength={100} defaultValue={user?.user_metadata?.["full_name"] ?? ""} /></div>
         <div className="space-y-1.5"><Label htmlFor="iq-email">Email</Label><Input id="iq-email" name="email" type="email" required maxLength={255} defaultValue={user?.email ?? ""} /></div>
       </div>
       <div className="space-y-1.5"><Label htmlFor="iq-phone">Phone (optional)</Label><Input id="iq-phone" name="phone" maxLength={30} /></div>
@@ -79,7 +79,7 @@ export function ViewingForm({ propertyId }: { propertyId: string }) {
       notes: String(fd.get("notes") ?? "").trim() || null,
     });
     setBusy(false);
-    if (error) return toast.error("Could not book the viewing. Please try again.");
+    if (error) { toast.error("Could not book the viewing. Please try again."); return; }
     toast.success("Viewing requested! We'll confirm your appointment soon.");
     setDone(true);
   };

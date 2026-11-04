@@ -35,15 +35,15 @@ export function formatSize(p: Pick<Property, "size_sqft" | "category">) {
 }
 
 export type Filters = {
-  q?: string;
-  listing?: "sale" | "rent" | "all";
-  section?: "standard" | "land" | "development";
-  category?: string;
-  min?: number;
-  max?: number;
-  beds?: number;
-  baths?: number;
-  minSize?: number;
+  q?: string | undefined;
+  listing?: "sale" | "rent" | "all" | undefined;
+  section?: "standard" | "land" | "development" | undefined;
+  category?: string | undefined;
+  min?: number | undefined;
+  max?: number | undefined;
+  beds?: number | undefined;
+  baths?: number | undefined;
+  minSize?: number | undefined;
 };
 
 export function filterProperties(list: Property[], f: Filters) {

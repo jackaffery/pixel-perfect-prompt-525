@@ -40,7 +40,7 @@ export function ListingBrowser({ initial = {}, lockListing, section, showListing
             onChange={(e) => set({ q: e.target.value })}
           />
           {showListingToggle && !lockListing && (
-            <Select value={f.listing} onValueChange={(v) => set({ listing: v as Filters["listing"] })}>
+            <Select value={f.listing ?? "all"} onValueChange={(v) => set({ listing: v as Filters["listing"] })}>
               <SelectTrigger><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Sale or rent</SelectItem>
@@ -60,9 +60,8 @@ export function ListingBrowser({ initial = {}, lockListing, section, showListing
             <Select
               value={rangeValue === "-1" ? "any" : rangeValue}
               onValueChange={(v) => {
-                if (v === "any") return set({ min: undefined, max: undefined });
-                const r = PRICE_RANGES[Number(v)];
-                set({ min: r.min, max: r.max });
+                const r = v === "any" ? undefined : PRICE_RANGES[Number(v)];
+                set({ min: r?.min, max: r?.max });
               }}
             >
               <SelectTrigger><SelectValue placeholder="Price range" /></SelectTrigger>

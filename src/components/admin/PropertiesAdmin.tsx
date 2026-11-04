@@ -29,13 +29,13 @@ export function PropertiesAdmin() {
 
   const quickUpdate = async (id: string, patch: Partial<Property>) => {
     const { error } = await supabase.from("properties").update(patch).eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["properties"] });
   };
   const remove = async (id: string) => {
     if (!confirm("Delete this property permanently?")) return;
     const { error } = await supabase.from("properties").delete().eq("id", id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Property deleted");
     qc.invalidateQueries({ queryKey: ["properties"] });
   };
@@ -103,7 +103,7 @@ export function PropertyForm({ initial, onDone }: { initial: Partial<Property>; 
     const fd = new FormData(e.currentTarget);
     const listing_type = String(fd.get("listing_type"));
     const price = Number(fd.get("price"));
-    if (!isValidPrice(listing_type, price)) return toast.error(`Sale prices must be at least $${MIN_SALE_PRICE.toLocaleString()}`);
+    if (!isValidPrice(listing_type, price)) { toast.error(`Sale prices must be at least $${MIN_SALE_PRICE.toLocaleString()}`); return; }
     const row = {
       title: String(fd.get("title")), address: String(fd.get("address")), city: String(fd.get("city")), state: String(fd.get("state")),
       price, listing_type, category: String(fd.get("category")), section: String(fd.get("section")), status: String(fd.get("status")),
@@ -117,7 +117,7 @@ export function PropertyForm({ initial, onDone }: { initial: Partial<Property>; 
       ? await supabase.from("properties").update(row).eq("id", initial.id)
       : await supabase.from("properties").insert(row);
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(initial.id ? "Property updated" : "Property added");
     qc.invalidateQueries({ queryKey: ["properties"] });
     onDone();

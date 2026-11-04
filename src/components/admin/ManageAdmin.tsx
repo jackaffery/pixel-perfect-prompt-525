@@ -30,7 +30,7 @@ export function CustomersAdmin() {
     const { error } = isAdmin
       ? await supabase.from("user_roles").delete().eq("user_id", id).eq("role", "admin")
       : await supabase.from("user_roles").insert({ user_id: id, role: "admin" });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     qc.invalidateQueries({ queryKey: ["admin-customers"] });
   };
   const send = async (e: FormEvent<HTMLFormElement>) => {
@@ -38,7 +38,7 @@ export function CustomersAdmin() {
     const fd = new FormData(e.currentTarget);
     const ids = target === "all" ? (data ?? []).map((c) => c.id) : target ? [target.id] : [];
     const { error } = await supabase.from("notifications").insert(ids.map((user_id) => ({ user_id, title: String(fd.get("title")), body: String(fd.get("body")) })));
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(`Notification sent to ${ids.length} customer(s)`);
     setTarget(null);
   };
@@ -91,7 +91,7 @@ export function AgentsAdmin() {
     if (file && file.size > 0 && user) photo_url = await uploadMedia(user.id, file);
     const row = { name: String(fd.get("name")), title: String(fd.get("title")), email: String(fd.get("email")), phone: String(fd.get("phone")), bio: String(fd.get("bio")), photo_url };
     const { error } = editing?.id ? await supabase.from("agents").update(row).eq("id", editing.id) : await supabase.from("agents").insert(row);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Agent saved");
     qc.invalidateQueries({ queryKey: ["agents"] });
     setEditing(null);
@@ -139,7 +139,7 @@ export function CategoriesAdmin() {
     const name = String(new FormData(e.currentTarget).get("name")).trim();
     const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
     const { error } = await supabase.from("categories").insert({ slug, name });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     e.currentTarget.reset();
     qc.invalidateQueries({ queryKey: ["categories"] });
   };
@@ -175,7 +175,7 @@ export function SettingsAdmin() {
       phone: String(fd.get("phone")), email: String(fd.get("email")), whatsapp: String(fd.get("whatsapp")).replace(/\D/g, ""),
       address: String(fd.get("address")), hours: String(fd.get("hours")), updated_at: new Date().toISOString(),
     }).eq("id", 1);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Website settings updated");
     qc.invalidateQueries({ queryKey: ["settings"] });
   };

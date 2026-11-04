@@ -29,7 +29,7 @@ function SellPage() {
     const listing_type = String(fd.get("listing_type"));
     const asking_price = Number(fd.get("price"));
     if (!isValidPrice(listing_type, asking_price)) {
-      return toast.error(`Sale prices must be at least $${MIN_SALE_PRICE.toLocaleString()}.`);
+      { toast.error(`Sale prices must be at least $${MIN_SALE_PRICE.toLocaleString()}.`); return; }
     }
     setBusy(true);
     try {

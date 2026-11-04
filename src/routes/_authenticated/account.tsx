@@ -43,7 +43,7 @@ function Account() {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const { error } = await supabase.from("profiles").upsert({ id: uid!, full_name: String(fd.get("full_name")), phone: String(fd.get("phone")) });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Profile saved");
     qc.invalidateQueries({ queryKey: ["profile"] });
   };
@@ -64,7 +64,7 @@ function Account() {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const { error } = await supabase.auth.updateUser({ password: String(fd.get("new")), current_password: String(fd.get("current")) } as never);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Password changed");
     e.currentTarget.reset();
   };
