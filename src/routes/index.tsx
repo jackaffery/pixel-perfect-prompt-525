@@ -207,7 +207,7 @@ function Home() {
               </a>
 
               {/* Floating Performance Pill */}
-              <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between rounded-xl bg-background/95 p-3.5 shadow-lift backdrop-blur-md">
+              <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-background/95 p-3.5 shadow-lift backdrop-blur-md">
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 font-bold">
                     <TrendingUp className="h-5 w-5" />
@@ -275,7 +275,7 @@ function Home() {
             </div>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Button asChild size="lg" variant="gold">
+              <Button asChild size="lg" variant="gold" className="h-auto min-h-10 whitespace-normal text-center">
                 <Link to="/sell">
                   List Your Property with Us <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
