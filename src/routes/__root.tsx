@@ -132,7 +132,7 @@ function TawkToChat() {
     (window as unknown as { Tawk_API: unknown; Tawk_LoadStart: Date }).Tawk_LoadStart = new Date();
 
     // Auto-correct typo from Tawk trigger in iframe/DOM
-    const typoPattern = /I want to by house/gi;
+    const typoPattern = /I wan(?:t)? to by (?:a )?house/gi;
     const replacement = "I want to buy a house";
 
     const fixTawkText = (node: Node) => {
