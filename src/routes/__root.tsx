@@ -131,6 +131,59 @@ function TawkToChat() {
       (window as unknown as { Tawk_API: unknown }).Tawk_API || {};
     (window as unknown as { Tawk_API: unknown; Tawk_LoadStart: Date }).Tawk_LoadStart = new Date();
 
+    // Auto-correct typo from Tawk trigger in iframe/DOM
+    const typoPattern = /I want to by house/gi;
+    const replacement = "I want to buy a house";
+
+    const fixTawkText = (node: Node) => {
+      if (node.nodeType === Node.TEXT_NODE && node.nodeValue && typoPattern.test(node.nodeValue)) {
+        node.nodeValue = node.nodeValue.replace(typoPattern, replacement);
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        const el = node as HTMLElement;
+        if (el.tagName === "IFRAME") {
+          try {
+            const doc = (el as HTMLIFrameElement).contentDocument || (el as HTMLIFrameElement).contentWindow?.document;
+            if (doc && doc.body) {
+              const walker = doc.createTreeWalker(doc.body, NodeFilter.SHOW_TEXT, null);
+              let textNode = walker.nextNode();
+              while (textNode) {
+                if (textNode.nodeValue && typoPattern.test(textNode.nodeValue)) {
+                  textNode.nodeValue = textNode.nodeValue.replace(typoPattern, replacement);
+                }
+                textNode = walker.nextNode();
+              }
+            }
+          } catch {
+            // Ignore cross-origin iframe security restrictions if isolated
+          }
+        }
+        for (let i = 0; i < node.childNodes.length; i++) {
+          fixTawkText(node.childNodes[i]);
+        }
+      }
+    };
+
+    const observer = new MutationObserver(() => {
+      try {
+        fixTawkText(document.body);
+        const iframes = document.querySelectorAll("iframe[src*='tawk.to'], iframe[title*='chat']");
+        iframes.forEach((iframe) => {
+          try {
+            const doc = (iframe as HTMLIFrameElement).contentDocument || (iframe as HTMLIFrameElement).contentWindow?.document;
+            if (doc && doc.body) {
+              fixTawkText(doc.body);
+            }
+          } catch {
+            // Ignore cross-origin
+          }
+        });
+      } catch {
+        // Safe fallback
+      }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+
     const s1 = document.createElement("script");
     const s0 = document.getElementsByTagName("script")[0];
     s1.id = "tawk-to-script";
