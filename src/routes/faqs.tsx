@@ -4,6 +4,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/faqs")({
+  staticData: { sitemap: true },
   head: () => seo("FAQs", "Answers to frequently asked questions about buying, selling and renting property."),
   component: Faqs,
 });

@@ -11,6 +11,7 @@ import { seo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/property/$id")({
+  staticData: { sitemap: false },
   head: () => seo("Property Details", "View photos, pricing, specifications and schedule a viewing for this property."),
   component: PropertyPage,
 });

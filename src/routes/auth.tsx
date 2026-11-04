@@ -11,6 +11,7 @@ import { Logo } from "@/components/site/Logo";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/auth")({
+  staticData: { sitemap: false },
   head: () => seo("Sign In", "Sign in or create your Asset Houses Realty account."),
   component: AuthPage,
 });

@@ -7,6 +7,7 @@ import { settingsQuery } from "@/lib/queries";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
+  staticData: { sitemap: true },
   head: () => seo("Contact Us", "Call, email, WhatsApp or visit the Asset Houses Realty office."),
   component: Contact,
 });

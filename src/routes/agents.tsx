@@ -6,6 +6,7 @@ import { agentsQuery } from "@/lib/queries";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/agents")({
+  staticData: { sitemap: true },
   head: () => seo("Our Agents", "Meet the professional real estate agents of Asset Houses Realty."),
   component: Agents,
 });

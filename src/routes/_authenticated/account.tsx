@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/_authenticated/account")({
+  staticData: { sitemap: false },
   head: () => seo("My Account", "Your profile, saved properties, inquiries and viewing appointments."),
   component: Account,
 });

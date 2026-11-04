@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/privacy")({
+  staticData: { sitemap: true },
   head: () => seo("Privacy Policy", "How Asset Houses Realty collects, uses and protects your personal information."),
   component: () => (
     <>

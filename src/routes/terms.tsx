@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/terms")({
+  staticData: { sitemap: true },
   head: () => seo("Terms & Conditions", "Terms and conditions for using the Asset Houses Realty website."),
   component: () => (
     <>

@@ -14,6 +14,7 @@ const schema = z.object({
 });
 
 export const Route = createFileRoute("/search")({
+  staticData: { sitemap: true },
   validateSearch: schema,
   head: () => seo("Search Properties", "Search homes, rentals, land and new developments by location, price, bedrooms and more."),
   component: SearchPage,
