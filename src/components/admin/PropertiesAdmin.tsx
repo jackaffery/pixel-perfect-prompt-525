@@ -123,34 +123,32 @@ export function PropertyForm({ initial, onDone }: { initial: Partial<Property>; 
     onDone();
   };
 
-  const F = ({ n, l, ...rest }: { n: keyof Property; l: string } & InputHTMLAttributes<HTMLInputElement>) =>
-    Field({ n, l, initial, ...rest });
 
   return (
     <form onSubmit={submit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
-        <F n="title" l="Property name" required />
-        <F n="address" l="Address" required />
-        <F n="city" l="City" required />
-        <F n="state" l="State" />
+        <Field initial={initial} n="title" l="Property name" required />
+        <Field initial={initial} n="address" l="Address" required />
+        <Field initial={initial} n="city" l="City" required />
+        <Field initial={initial} n="state" l="State" />
       </div>
       <div className="grid gap-4 sm:grid-cols-4">
         <div className="space-y-1.5"><Label>Listing</Label><select name="listing_type" defaultValue={initial.listing_type} className={sel}><option value="sale">For sale</option><option value="rent">For rent (monthly)</option></select></div>
-        <F n="price" l="Price (USD)" type="number" min={1} required />
+        <Field initial={initial} n="price" l="Price (USD)" type="number" min={1} required />
         <div className="space-y-1.5"><Label>Category</Label><select name="category" defaultValue={initial.category} className={sel}>{cats.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}</select></div>
         <div className="space-y-1.5"><Label>Page section</Label><select name="section" defaultValue={initial.section} className={sel}><option value="standard">Buy / Rent</option><option value="land">Land & Plots</option><option value="development">New Developments</option></select></div>
       </div>
       <div className="grid gap-4 sm:grid-cols-4">
-        <F n="bedrooms" l="Bedrooms" type="number" min={0} />
-        <F n="bathrooms" l="Bathrooms" type="number" min={0} step="0.5" />
-        <F n="size_sqft" l="Size (sq ft)" type="number" min={0} />
+        <Field initial={initial} n="bedrooms" l="Bedrooms" type="number" min={0} />
+        <Field initial={initial} n="bathrooms" l="Bathrooms" type="number" min={0} step="0.5" />
+        <Field initial={initial} n="size_sqft" l="Size (sq ft)" type="number" min={0} />
         <div className="space-y-1.5"><Label>Status</Label><select name="status" defaultValue={initial.status} className={sel}>{["available", "pending", "sold", "rented"].map((s) => <option key={s}>{s}</option>)}</select></div>
       </div>
       <div className="space-y-1.5"><Label>Description</Label><Textarea name="description" rows={4} defaultValue={initial.description ?? ""} /></div>
       <div className="space-y-1.5"><Label>Features (comma separated)</Label><Input name="features" defaultValue={(initial.features ?? []).join(", ")} /></div>
       <div className="grid gap-4 sm:grid-cols-3">
-        <F n="lat" l="Latitude" type="number" step="any" />
-        <F n="lng" l="Longitude" type="number" step="any" />
+        <Field initial={initial} n="lat" l="Latitude" type="number" step="any" />
+        <Field initial={initial} n="lng" l="Longitude" type="number" step="any" />
         <div className="space-y-1.5"><Label>Agent</Label><select name="agent_id" defaultValue={initial.agent_id ?? ""} className={sel}><option value="">None</option>{agents.map((a) => <option key={a.id} value={a.id}>{a.name}</option>)}</select></div>
       </div>
       <div className="space-y-2">
