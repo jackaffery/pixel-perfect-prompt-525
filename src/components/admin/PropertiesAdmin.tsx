@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type InputHTMLAttributes } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Pencil, Plus, Trash2, X } from "lucide-react";
@@ -15,6 +15,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 const sel = "h-9 w-full rounded-md border border-input bg-background px-3 text-sm";
+
+function Field({ n, l, initial, ...rest }: { n: keyof Property; l: string; initial: Partial<Property> } & InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <div className="space-y-1.5"><Label>{l}</Label><Input name={n} defaultValue={(initial[n] as string | number | undefined) ?? ""} {...rest} /></div>
+  );
+}
 
 export function PropertiesAdmin() {
   const { data = [] } = useQuery(propertiesQuery);
@@ -117,9 +123,8 @@ export function PropertyForm({ initial, onDone }: { initial: Partial<Property>; 
     onDone();
   };
 
-  const F = ({ n, l, ...rest }: { n: keyof Property; l: string } & React.InputHTMLAttributes<HTMLInputElement>) => (
-    <div className="space-y-1.5"><Label>{l}</Label><Input name={n} defaultValue={(initial[n] as string | number | undefined) ?? ""} {...rest} /></div>
-  );
+  const F = ({ n, l, ...rest }: { n: keyof Property; l: string } & InputHTMLAttributes<HTMLInputElement>) =>
+    Field({ n, l, initial, ...rest });
 
   return (
     <form onSubmit={submit} className="space-y-4">
