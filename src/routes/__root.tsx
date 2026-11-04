@@ -122,6 +122,33 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function TawkToChat() {
+  useEffect(() => {
+    // Check if script is already added
+    if (document.getElementById("tawk-to-script")) return;
+
+    (window as unknown as { Tawk_API: unknown; Tawk_LoadStart: Date }).Tawk_API =
+      (window as unknown as { Tawk_API: unknown }).Tawk_API || {};
+    (window as unknown as { Tawk_API: unknown; Tawk_LoadStart: Date }).Tawk_LoadStart = new Date();
+
+    const s1 = document.createElement("script");
+    const s0 = document.getElementsByTagName("script")[0];
+    s1.id = "tawk-to-script";
+    s1.async = true;
+    s1.src = "https://embed.tawk.to/6aeb43a99e1b2b3c385b3ed6/1k6jg0k1b";
+    s1.charset = "UTF-8";
+    s1.setAttribute("crossorigin", "*");
+
+    if (s0 && s0.parentNode) {
+      s0.parentNode.insertBefore(s1, s0);
+    } else {
+      document.head.appendChild(s1);
+    }
+  }, []);
+
+  return null;
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -136,6 +163,7 @@ function RootComponent() {
           <SiteFooter />
         </div>
         <WhatsAppButton />
+        <TawkToChat />
         <Toaster richColors position="top-center" />
       </AuthProvider>
     </QueryClientProvider>
