@@ -1,43 +1,47 @@
 import { Heart } from "lucide-react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
-export function useFavorites() {
-  const { user } = useAuth();
-  return useQuery({
-    queryKey: ["favorites", user?.id],
-    enabled: !!user,
-    queryFn: async () => {
-      const { data, error } = await supabase.from("favorites").select("property_id");
-      if (error) throw error;
-      return data.map((d) => d.property_id);
-    },
-  });
+const LOCAL_STORAGE_KEY = "asset_houses_favorites";
+
+function getLocalFavorites(): string[] {
+  try {
+    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function setLocalFavorites(favs: string[]) {
+  try {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(favs));
+  } catch {
+    // Ignore storage quota errors
+  }
 }
 
 export function FavoriteButton({ propertyId }: { propertyId: string }) {
-  const { user } = useAuth();
-  const navigate = useNavigate();
-  const qc = useQueryClient();
-  const { data: favs = [] } = useFavorites();
-  const active = favs.includes(propertyId);
+  const [active, setActive] = useState(false);
 
-  const toggle = async () => {
-    if (!user) {
-      toast("Sign in to save favorite properties");
-      navigate({ to: "/auth" });
-      return;
+  useEffect(() => {
+    setActive(getLocalFavorites().includes(propertyId));
+  }, [propertyId]);
+
+  const toggle = () => {
+    const favs = getLocalFavorites();
+    let updated: string[];
+    if (favs.includes(propertyId)) {
+      updated = favs.filter((id) => id !== propertyId);
+      setActive(false);
+      toast.success("Removed from favorites");
+    } else {
+      updated = [...favs, propertyId];
+      setActive(true);
+      toast.success("Saved to favorites");
     }
-    const { error } = active
-      ? await supabase.from("favorites").delete().eq("user_id", user.id).eq("property_id", propertyId)
-      : await supabase.from("favorites").insert({ user_id: user.id, property_id: propertyId });
-    if (error) { toast.error(error.message); return; }
-    toast.success(active ? "Removed from favorites" : "Saved to favorites");
-    qc.invalidateQueries({ queryKey: ["favorites"] });
+    setLocalFavorites(updated);
   };
 
   return (

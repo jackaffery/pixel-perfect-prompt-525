@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { filterProperties, isValidPrice, type Property } from "@/lib/listing";
 
 const base = {
-  city: "Austin", state: "TX", address: "1 A St", title: "Home", listing_type: "sale",
+  city: "Rockford", state: "IL", address: "1 A St", title: "Home", listing_type: "sale",
   section: "standard", category: "house", price: 100000, bedrooms: 3, bathrooms: 2, size_sqft: 1500,
 } as unknown as Property;
 

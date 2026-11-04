@@ -62,7 +62,6 @@ function SellPage() {
           {["Submit your property details and photos.", "An agent reviews and values your listing.", "Once approved, your property goes live to buyers or renters."].map((t, i) => (
             <div key={t} className="flex gap-4"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-primary font-display text-primary-foreground">{i + 1}</span><p className="pt-2">{t}</p></div>
           ))}
-          {!user && <p className="rounded-md bg-accent p-4 text-sm text-accent-foreground">Tip: sign in to upload photos and track your submission status in your account.</p>}
         </div>
         {done ? (
           <div className="rounded-md border bg-card p-10 text-center shadow-soft">

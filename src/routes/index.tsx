@@ -17,9 +17,9 @@ export const Route = createFileRoute("/")({
 });
 
 export const TESTIMONIALS = [
-  { name: "Jennifer & Mark T.", place: "Austin, TX", text: "Asset Houses Realty made buying our first home stress-free. Clear pricing, honest advice and quick answers every step of the way." },
-  { name: "Robert L.", place: "Dallas, TX", text: "Sold my townhome above asking within three weeks. The team handled everything professionally." },
-  { name: "Angela P.", place: "Houston, TX", text: "Found a beautiful rental for my family in days. Viewing scheduling was simple and the agent was wonderful." },
+  { name: "Jennifer & Mark T.", place: "Rockford, IL", text: "Asset Houses Realty made buying our first home stress-free. Clear pricing, honest advice and quick answers every step of the way." },
+  { name: "Robert L.", place: "Rockford, IL", text: "Sold my townhome above asking within two weeks. The team handled everything professionally." },
+  { name: "Angela P.", place: "Rockford, IL", text: "Found a beautiful rental for my family in days. Viewing scheduling was simple and the agent was wonderful." },
 ];
 
 function HeroSearch() {

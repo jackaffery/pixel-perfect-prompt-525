@@ -47,25 +47,14 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 xl:flex">
-          {isAdmin && (
+        {isAdmin && (
+          <div className="hidden items-center gap-2 xl:flex">
             <Button asChild variant="ghost" size="sm">
               <Link to="/admin"><LayoutDashboard /> Admin</Link>
             </Button>
-          )}
-          {user ? (
-            <>
-              <Button asChild variant="outline" size="sm">
-                <Link to="/account"><User /> My account</Link>
-              </Button>
-              <Button variant="ghost" size="sm" onClick={signOut}>Sign out</Button>
-            </>
-          ) : (
-            <Button asChild size="sm">
-              <Link to="/auth">Sign in</Link>
-            </Button>
-          )}
-        </div>
+            <Button variant="ghost" size="sm" onClick={signOut}>Sign out</Button>
+          </div>
+        )}
         <button className="xl:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
           {open ? <X /> : <Menu />}
         </button>
@@ -79,19 +68,12 @@ export function SiteHeader() {
               </Link>
             ))}
             <Link to="/faqs" onClick={() => setOpen(false)} className="py-2.5 font-medium">FAQs</Link>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {isAdmin && (
+            {isAdmin && (
+              <div className="mt-3 flex flex-wrap gap-2">
                 <Button asChild variant="outline" size="sm"><Link to="/admin" onClick={() => setOpen(false)}>Admin</Link></Button>
-              )}
-              {user ? (
-                <>
-                  <Button asChild size="sm"><Link to="/account" onClick={() => setOpen(false)}>My account</Link></Button>
-                  <Button variant="ghost" size="sm" onClick={signOut}>Sign out</Button>
-                </>
-              ) : (
-                <Button asChild size="sm"><Link to="/auth" onClick={() => setOpen(false)}>Sign in</Link></Button>
-              )}
-            </div>
+                <Button variant="ghost" size="sm" onClick={signOut}>Sign out</Button>
+              </div>
+            )}
           </nav>
         </div>
       )}
