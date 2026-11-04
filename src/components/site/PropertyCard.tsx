@@ -29,7 +29,6 @@ export function PropertyCard({ p }: { p: Property }) {
           </span>
         )}
       </Link>
-      <div className="absolute" />
       <div className="space-y-3 p-5">
         <div className="flex items-start justify-between gap-3">
           <div>
