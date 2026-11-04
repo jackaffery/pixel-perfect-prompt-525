@@ -88,7 +88,7 @@ function SellPage() {
               </div>
               <div className="space-y-1.5"><Label>Category</Label>
                 <select name="category" className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm">
-                  {["house", "apartment", "condo", "townhouse", "villa", "land"].map((c) => <option key={c} value={c}>{c[0].toUpperCase() + c.slice(1)}</option>)}
+                  {["house", "apartment", "condo", "townhouse", "villa", "land"].map((c) => <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>)}
                 </select>
               </div>
               <div className="space-y-1.5"><Label>Asking price (USD)</Label><Input name="price" type="number" min={1} required placeholder="Sale min. $40,000" /></div>

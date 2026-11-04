@@ -26,7 +26,7 @@ export function SubmissionsAdmin() {
   const decide = async (s: (typeof data)[number], approve: boolean) => {
     if (approve) {
       const { error } = await supabase.from("properties").insert({
-        title: `${s.category[0].toUpperCase() + s.category.slice(1)} at ${s.address}`, address: s.address, city: s.city,
+        title: `${s.category.charAt(0).toUpperCase() + s.category.slice(1)} at ${s.address}`, address: s.address, city: s.city,
         price: s.asking_price, listing_type: s.listing_type, category: s.category, section: s.category === "land" ? "land" : "standard",
         bedrooms: s.bedrooms ?? 0, bathrooms: s.bathrooms ?? 0, size_sqft: s.size_sqft ?? 0, description: s.description ?? "", images: s.images,
       });

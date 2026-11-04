@@ -77,7 +77,7 @@ function PropertyPage() {
               { i: BedDouble, l: "Bedrooms", v: p.bedrooms },
               { i: Bath, l: "Bathrooms", v: Number(p.bathrooms) },
               { i: Maximize, l: "Size", v: formatSize(p) },
-              { i: Tag, l: "Type", v: p.category[0].toUpperCase() + p.category.slice(1) },
+              { i: Tag, l: "Type", v: p.category.charAt(0).toUpperCase() + p.category.slice(1) },
             ].map(({ i: I, l, v }) => (
               <div key={l}><I className="h-5 w-5 text-sage" /><p className="mt-2 text-xs uppercase tracking-wider text-muted-foreground">{l}</p><p className="font-semibold">{v}</p></div>
             ))}
