@@ -10,8 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AgentsRouteImport } from './routes/agents'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BuyRouteImport } from './routes/buy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DevelopmentsRouteImport } from './routes/developments'
@@ -19,14 +21,20 @@ import { Route as FaqsRouteImport } from './routes/faqs'
 import { Route as LandRouteImport } from './routes/land'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RentRouteImport } from './routes/rent'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AuthenticatedAccountRouteImport } from './routes/_authenticated/account'
 import { Route as PropertyIdRouteImport } from './routes/property.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -37,6 +45,11 @@ const AboutRoute = AboutRouteImport.update({
 const AgentsRoute = AgentsRouteImport.update({
   id: '/agents',
   path: '/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BuyRoute = BuyRouteImport.update({
@@ -74,6 +87,11 @@ const RentRoute = RentRouteImport.update({
   path: '/rent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -89,6 +107,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAccountRoute = AuthenticatedAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const PropertyIdRoute = PropertyIdRouteImport.update({
   id: '/property/$id',
   path: '/property/$id',
@@ -99,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/agents': typeof AgentsRoute
+  '/auth': typeof AuthRoute
   '/buy': typeof BuyRoute
   '/contact': typeof ContactRoute
   '/developments': typeof DevelopmentsRoute
@@ -106,15 +130,18 @@ export interface FileRoutesByFullPath {
   '/land': typeof LandRoute
   '/privacy': typeof PrivacyRoute
   '/rent': typeof RentRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
   '/sell': typeof SellRoute
   '/terms': typeof TermsRoute
+  '/account': typeof AuthenticatedAccountRoute
   '/property/$id': typeof PropertyIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/agents': typeof AgentsRoute
+  '/auth': typeof AuthRoute
   '/buy': typeof BuyRoute
   '/contact': typeof ContactRoute
   '/developments': typeof DevelopmentsRoute
@@ -122,16 +149,20 @@ export interface FileRoutesByTo {
   '/land': typeof LandRoute
   '/privacy': typeof PrivacyRoute
   '/rent': typeof RentRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
   '/sell': typeof SellRoute
   '/terms': typeof TermsRoute
+  '/account': typeof AuthenticatedAccountRoute
   '/property/$id': typeof PropertyIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/agents': typeof AgentsRoute
+  '/auth': typeof AuthRoute
   '/buy': typeof BuyRoute
   '/contact': typeof ContactRoute
   '/developments': typeof DevelopmentsRoute
@@ -139,9 +170,11 @@ export interface FileRoutesById {
   '/land': typeof LandRoute
   '/privacy': typeof PrivacyRoute
   '/rent': typeof RentRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/search': typeof SearchRoute
   '/sell': typeof SellRoute
   '/terms': typeof TermsRoute
+  '/_authenticated/account': typeof AuthenticatedAccountRoute
   '/property/$id': typeof PropertyIdRoute
 }
 export interface FileRouteTypes {
@@ -150,6 +183,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/agents'
+    | '/auth'
     | '/buy'
     | '/contact'
     | '/developments'
@@ -157,15 +191,18 @@ export interface FileRouteTypes {
     | '/land'
     | '/privacy'
     | '/rent'
+    | '/reset-password'
     | '/search'
     | '/sell'
     | '/terms'
+    | '/account'
     | '/property/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/agents'
+    | '/auth'
     | '/buy'
     | '/contact'
     | '/developments'
@@ -173,15 +210,19 @@ export interface FileRouteTypes {
     | '/land'
     | '/privacy'
     | '/rent'
+    | '/reset-password'
     | '/search'
     | '/sell'
     | '/terms'
+    | '/account'
     | '/property/$id'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/agents'
+    | '/auth'
     | '/buy'
     | '/contact'
     | '/developments'
@@ -189,16 +230,20 @@ export interface FileRouteTypes {
     | '/land'
     | '/privacy'
     | '/rent'
+    | '/reset-password'
     | '/search'
     | '/sell'
     | '/terms'
+    | '/_authenticated/account'
     | '/property/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AgentsRoute: typeof AgentsRoute
+  AuthRoute: typeof AuthRoute
   BuyRoute: typeof BuyRoute
   ContactRoute: typeof ContactRoute
   DevelopmentsRoute: typeof DevelopmentsRoute
@@ -206,6 +251,7 @@ export interface RootRouteChildren {
   LandRoute: typeof LandRoute
   PrivacyRoute: typeof PrivacyRoute
   RentRoute: typeof RentRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SearchRoute: typeof SearchRoute
   SellRoute: typeof SellRoute
   TermsRoute: typeof TermsRoute
@@ -221,6 +267,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -233,6 +286,13 @@ declare module '@tanstack/react-router' {
       path: '/agents'
       fullPath: '/agents'
       preLoaderRoute: typeof AgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/buy': {
@@ -284,6 +344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -305,6 +372,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/account': {
+      id: '/_authenticated/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AuthenticatedAccountRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/property/$id': {
       id: '/property/$id'
       path: '/property/$id'
@@ -315,10 +389,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAccountRoute: typeof AuthenticatedAccountRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAccountRoute: AuthenticatedAccountRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AgentsRoute: AgentsRoute,
+  AuthRoute: AuthRoute,
   BuyRoute: BuyRoute,
   ContactRoute: ContactRoute,
   DevelopmentsRoute: DevelopmentsRoute,
@@ -326,6 +413,7 @@ const rootRouteChildren: RootRouteChildren = {
   LandRoute: LandRoute,
   PrivacyRoute: PrivacyRoute,
   RentRoute: RentRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SearchRoute: SearchRoute,
   SellRoute: SellRoute,
   TermsRoute: TermsRoute,
