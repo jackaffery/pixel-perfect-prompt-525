@@ -14,7 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/lib/auth";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import { SiteFooter, WhatsAppButton } from "@/components/site/SiteFooter";
+import { SiteFooter } from "@/components/site/SiteFooter";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -162,7 +162,6 @@ function RootComponent() {
           </main>
           <SiteFooter />
         </div>
-        <WhatsAppButton />
         <TawkToChat />
         <Toaster richColors position="top-center" />
       </AuthProvider>
