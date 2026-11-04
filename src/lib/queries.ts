@@ -26,6 +26,7 @@ export const agentsQuery = queryOptions({
     if (error) throw error;
     return (data ?? []).map((a) => ({
       ...a,
+      phone: "+1 (815)-AHR",
       email: "support@assethousesrealtly.online",
       bio: a.bio?.replace(/Texas/gi, "Rockford, Illinois") ?? a.bio,
     }));
@@ -39,6 +40,7 @@ export const settingsQuery = queryOptions({
     if (error) throw error;
     return {
       ...data,
+      phone: "+1 (815)-AHR",
       email: "support@assethousesrealtly.online",
       address: "120 E State St, Suite 400, Rockford, IL 61104",
       hero_subtext: data?.hero_subtext?.replace(/Texas/gi, "Rockford, Illinois") ?? data?.hero_subtext,
