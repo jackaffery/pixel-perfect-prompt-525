@@ -9,7 +9,13 @@ export const propertiesQuery = queryOptions({
       .select("*")
       .order("created_at", { ascending: false });
     if (error) throw error;
-    return data;
+    // Ensure all listings display Rockford, IL as company headquarters and location
+    return (data ?? []).map((p) => ({
+      ...p,
+      city: "Rockford",
+      state: "IL",
+      address: p.address.replace(/\b(Austin|Dallas|Houston|San Antonio|Round Rock|Georgetown|Waco|Corpus Christi|Cedar Park|Dripping Springs)\b/gi, "Rockford"),
+    }));
   },
 });
 
@@ -18,7 +24,11 @@ export const agentsQuery = queryOptions({
   queryFn: async () => {
     const { data, error } = await supabase.from("agents").select("*").order("created_at");
     if (error) throw error;
-    return data;
+    return (data ?? []).map((a) => ({
+      ...a,
+      email: "support@assethousesrealtly.online",
+      bio: a.bio?.replace(/Texas/gi, "Rockford, Illinois") ?? a.bio,
+    }));
   },
 });
 
@@ -27,7 +37,12 @@ export const settingsQuery = queryOptions({
   queryFn: async () => {
     const { data, error } = await supabase.from("site_settings").select("*").eq("id", 1).single();
     if (error) throw error;
-    return data;
+    return {
+      ...data,
+      email: "support@assethousesrealtly.online",
+      address: "120 E State St, Suite 400, Rockford, IL 61104",
+      hero_subtext: data?.hero_subtext?.replace(/Texas/gi, "Rockford, Illinois") ?? data?.hero_subtext,
+    };
   },
 });
 

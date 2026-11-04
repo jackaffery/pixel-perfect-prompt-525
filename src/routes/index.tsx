@@ -198,7 +198,7 @@ function Home() {
               </a>
 
               <a
-                href="mailto:contact@assethouses.com?subject=Sell%20My%20Property"
+                href="mailto:support@assethousesrealtly.online?subject=Sell%20My%20Property"
                 title="Direct Buyer Email Blast Network"
                 className="absolute top-1/3 right-6 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 text-primary shadow-lg backdrop-blur-md transition-all hover:scale-110 hover:bg-white"
                 aria-label="Direct Email Campaigns"

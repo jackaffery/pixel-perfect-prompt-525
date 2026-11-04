@@ -206,7 +206,7 @@ create table public.site_settings (
   hero_subtext text not null default 'Discover beautiful homes, valuable properties and exceptional real estate opportunities with Asset Houses Realty. Whether you are buying, selling, renting or investing, we make your property journey easier.',
   hero_image text not null default 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=2000&q=80',
   phone text not null default '+1 (555) 214-7800',
-  email text not null default 'hello@assethousesrealty.com',
+  email text not null default 'support@assethousesrealtly.online',
   whatsapp text not null default '15552147800',
   address text not null default '120 E State St, Suite 400, Rockford, IL 61104',
   hours text not null default 'Mon–Fri 9am–6pm · Sat 10am–4pm',
@@ -223,10 +223,10 @@ insert into public.site_settings (id) values (1);
 insert into public.categories (slug, name) values ('house','House'),('apartment','Apartment'),('condo','Condo'),('townhouse','Townhouse'),('land','Land'),('villa','Villa');
 
 insert into public.agents (id, name, title, email, phone, photo_url, bio) values
-('a0000000-0000-0000-0000-000000000001','Michael Carter','Principal Broker','michael@assethousesrealty.com','+1 (555) 214-7801','https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80','Over 15 years helping families find homes across Rockford, Illinois. (Sample profile)'),
-('a0000000-0000-0000-0000-000000000002','Sarah Mitchell','Senior Sales Agent','sarah@assethousesrealty.com','+1 (555) 214-7802','https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80','Specialist in suburban family homes and first-time buyers. (Sample profile)'),
-('a0000000-0000-0000-0000-000000000003','David Reynolds','Land & Investment Advisor','david@assethousesrealty.com','+1 (555) 214-7803','https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80','Guides investors through land, plots and new developments. (Sample profile)'),
-('a0000000-0000-0000-0000-000000000004','Emily Johnson','Rentals Manager','emily@assethousesrealty.com','+1 (555) 214-7804','https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80','Matches tenants with quality rental homes and apartments. (Sample profile)');
+('a0000000-0000-0000-0000-000000000001','Michael Carter','Principal Broker','support@assethousesrealtly.online','+1 (555) 214-7801','https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80','Over 15 years helping families find homes across Rockford, Illinois. (Sample profile)'),
+('a0000000-0000-0000-0000-000000000002','Sarah Mitchell','Senior Sales Agent','support@assethousesrealtly.online','+1 (555) 214-7802','https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80','Specialist in suburban family homes and first-time buyers. (Sample profile)'),
+('a0000000-0000-0000-0000-000000000003','David Reynolds','Land & Investment Advisor','support@assethousesrealtly.online','+1 (555) 214-7803','https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80','Guides investors through land, plots and new developments. (Sample profile)'),
+('a0000000-0000-0000-0000-000000000004','Emily Johnson','Rentals Manager','support@assethousesrealtly.online','+1 (555) 214-7804','https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&q=80','Matches tenants with quality rental homes and apartments. (Sample profile)');
 
 insert into public.properties (title,address,city,state,price,listing_type,category,section,bedrooms,bathrooms,size_sqft,description,images,features,status,featured,is_demo,lat,lng,agent_id) values
 ('Oakridge Family Residence','418 Oakridge Lane','Rockford','IL',485000,'sale','house','standard',4,3,2850,'A bright, spacious family home on a tree-lined street with an open kitchen, large backyard and two-car garage.','{https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1600&q=80,https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80,https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80}','{Two-car garage,Fenced backyard,Hardwood floors,Central A/C,Walk-in closets}','available',true,true,42.2711,-89.0940,'a0000000-0000-0000-0000-000000000002'),
