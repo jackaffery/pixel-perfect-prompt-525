@@ -12,6 +12,7 @@ import { PRICE_RANGES } from "@/lib/listing";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => seo("Find a Place to Call Home", "Discover beautiful homes, land and investment properties for sale and rent with Asset Houses Realty."),
   component: Home,
 });

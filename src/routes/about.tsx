@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
+  staticData: { sitemap: true },
   head: () => seo("About Us", "Our background, mission, vision and values at Asset Houses Realty."),
   component: About,
 });

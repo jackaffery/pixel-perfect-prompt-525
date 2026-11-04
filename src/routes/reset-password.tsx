@@ -8,7 +8,8 @@ import { Label } from "@/components/ui/label";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/reset-password")({
-  head: () => seo("Reset Password", "Set a new password for your Asset Houses Realty account."),
+  staticData: { sitemap: false },
+  head: () => { const h = seo("Reset Password", "Set a new password for your Asset Houses Realty account."); return { meta: [...h.meta, { name: "robots", content: "noindex" }] }; },
   component: Reset,
 });
 

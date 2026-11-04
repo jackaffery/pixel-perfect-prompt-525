@@ -4,6 +4,7 @@ import { ListingBrowser } from "@/components/site/ListingBrowser";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/rent")({
+  staticData: { sitemap: true },
   head: () => seo("Rent a Property", "Find quality rental homes, apartments and condos with monthly pricing."),
   component: () => (
     <>

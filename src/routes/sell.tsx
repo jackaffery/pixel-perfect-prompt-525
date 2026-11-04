@@ -14,6 +14,7 @@ import { uploadMedia } from "@/lib/queries";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/sell")({
+  staticData: { sitemap: true },
   head: () => seo("Sell Your Property", "List your home, rental or land with Asset Houses Realty. Submit your property for review."),
   component: SellPage,
 });

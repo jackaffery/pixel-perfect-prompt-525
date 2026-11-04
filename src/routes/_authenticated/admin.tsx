@@ -8,6 +8,7 @@ import { CustomersAdmin, AgentsAdmin, CategoriesAdmin, SettingsAdmin } from "@/c
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/_authenticated/admin")({
+  staticData: { sitemap: false },
   head: () => ({ ...seo("Admin Dashboard", "Manage properties, customers and inquiries."), meta: [...seo("Admin Dashboard", "Manage properties, customers and inquiries.").meta, { name: "robots", content: "noindex" }] }),
   beforeLoad: async () => {
     const { data: u } = await supabase.auth.getUser();
