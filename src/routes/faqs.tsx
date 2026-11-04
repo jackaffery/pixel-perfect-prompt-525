@@ -8,7 +8,7 @@ export const Route = createFileRoute("/faqs")({
   component: Faqs,
 });
 
-const FAQS = [
+const FAQS: [string, string][] = [
   ["Do I need an account to browse properties?", "No. You can browse and search every listing without registering. An account lets you save favorites, track inquiries and manage viewings."],
   ["What is the starting price for properties for sale?", "Properties for sale start at $40,000, with listings across every range up to $500,000 and above."],
   ["How do I schedule a property viewing?", "Open any property and choose \"Schedule viewing\". Pick a preferred date and time and we'll confirm your appointment."],
