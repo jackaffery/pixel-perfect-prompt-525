@@ -45,7 +45,7 @@ function HeroSearch() {
   return (
     <form
       onSubmit={(e) => { e.preventDefault(); go(); }}
-      className="fade-up grid gap-2 rounded-md bg-background p-3 shadow-lift sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_0.8fr_auto]"
+      className="fade-up grid gap-2 rounded-md bg-background p-3 text-foreground shadow-lift sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_0.8fr_auto]"
     >
       <Input placeholder="City, state or address" value={q} onChange={(e) => setQ(e.target.value)} className="h-12 border-0 bg-muted" />
       <Select value={category} onValueChange={setCategory}>
