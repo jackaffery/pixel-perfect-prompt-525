@@ -9,13 +9,24 @@ export const propertiesQuery = queryOptions({
       .select("*")
       .order("created_at", { ascending: false });
     if (error) throw error;
-    // Ensure all listings display Rockford, IL as company headquarters and location
-    return (data ?? []).map((p) => ({
-      ...p,
-      city: "Rockford",
-      state: "IL",
-      address: p.address.replace(/\b(Austin|Dallas|Houston|San Antonio|Round Rock|Georgetown|Waco|Corpus Christi|Cedar Park|Dripping Springs)\b/gi, "Rockford"),
-    }));
+    // Rockford, Illinois base coordinates and localized variations for each property
+    const ROCKFORD_BASE_LAT = 42.2711;
+    const ROCKFORD_BASE_LNG = -89.0940;
+
+    return (data ?? []).map((p, index) => {
+      // Deterministic slight offset for each property around Rockford, IL area
+      const offsetLat = ((index % 5) - 2) * 0.015;
+      const offsetLng = (Math.floor(index / 5) - 1) * 0.018;
+
+      return {
+        ...p,
+        city: "Rockford",
+        state: "IL",
+        lat: ROCKFORD_BASE_LAT + offsetLat,
+        lng: ROCKFORD_BASE_LNG + offsetLng,
+        address: p.address.replace(/\b(Austin|Dallas|Houston|San Antonio|Round Rock|Georgetown|Waco|Corpus Christi|Cedar Park|Dripping Springs)\b/gi, "Rockford"),
+      };
+    });
   },
 });
 
