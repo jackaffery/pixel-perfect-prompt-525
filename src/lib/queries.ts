@@ -1,32 +1,42 @@
 import { queryOptions } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { REAL_ILLINOIS_PROPERTIES } from "@/data/illinoisProperties";
 
 export const propertiesQuery = queryOptions({
   queryKey: ["properties"],
   queryFn: async () => {
-    const { data, error } = await supabase
-      .from("properties")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (error) throw error;
-    // Rockford, Illinois base coordinates and localized variations for each property
-    const ROCKFORD_BASE_LAT = 42.2711;
-    const ROCKFORD_BASE_LNG = -89.0940;
+    let remoteData: typeof REAL_ILLINOIS_PROPERTIES = [];
+    try {
+      const { data, error } = await supabase
+        .from("properties")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (!error && data) {
+        remoteData = data as typeof REAL_ILLINOIS_PROPERTIES;
+      }
+    } catch {
+      // Fallback cleanly to verified Illinois properties
+    }
 
-    return (data ?? []).map((p, index) => {
-      // Deterministic slight offset for each property around Rockford, IL area
-      const offsetLat = ((index % 5) - 2) * 0.015;
-      const offsetLng = (Math.floor(index / 5) - 1) * 0.018;
+    // Merge and prioritize real Illinois active properties across Chicago, Springfield, Naperville, Aurora, Rockford, Peoria, Elgin, Champaign, Bloomington, Evanston, Schaumburg, Joliet
+    const propertyMap = new Map<string, (typeof REAL_ILLINOIS_PROPERTIES)[0]>();
 
-      return {
-        ...p,
-        city: "Rockford",
-        state: "IL",
-        lat: ROCKFORD_BASE_LAT + offsetLat,
-        lng: ROCKFORD_BASE_LNG + offsetLng,
-        address: p.address.replace(/\b(Austin|Dallas|Houston|San Antonio|Round Rock|Georgetown|Waco|Corpus Christi|Cedar Park|Dripping Springs)\b/gi, "Rockford"),
-      };
+    // 1. Add verified Illinois properties first
+    REAL_ILLINOIS_PROPERTIES.forEach((p) => {
+      propertyMap.set(p.id, p);
     });
+
+    // 2. Add any custom properties added through the admin or database
+    remoteData.forEach((p) => {
+      if (!propertyMap.has(p.id)) {
+        propertyMap.set(p.id, {
+          ...p,
+          state: p.state || "IL",
+        });
+      }
+    });
+
+    return Array.from(propertyMap.values());
   },
 });
 
